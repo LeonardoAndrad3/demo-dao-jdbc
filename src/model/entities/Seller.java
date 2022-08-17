@@ -74,6 +74,14 @@ public class Seller implements Serializable{
 		return Objects.hash(id);
 	}
 
+	public Department getDepartment() {
+		return department;
+	}
+
+	public void setDepartment(Department department) {
+		this.department = department;
+	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
