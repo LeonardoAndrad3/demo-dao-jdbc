@@ -67,7 +67,8 @@ public class SellerDaoJDBC implements SellerDao {
 	public void update(Seller seller) {
 		PreparedStatement st  = null;
 		try {
-			st = conn.prepareStatement("update seller "
+			st = conn.prepareStatement(
+					"update seller "
 					+ "Set Name = ?, Email = ?, BirthDate = ?, BaseSalary = ?, DepartmentId = ? "
 					+ "where id = ?");
 			
@@ -89,8 +90,18 @@ public class SellerDaoJDBC implements SellerDao {
 
 	@Override
 	public void deleteById(Integer id) {
-		// TODO Auto-generated method stub
-
+		PreparedStatement st  = null;
+		try {
+			st = conn.prepareStatement("Delete from seller where id = ?");
+			st.setInt(1, id);
+			
+			st.executeUpdate();		
+			
+		} catch(SQLException e) {
+			throw new DbException(e.getMessage());
+		} finally {
+			DbConnect.closeStatement(st);
+		}
 	}
 
 	@Override
